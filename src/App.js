@@ -1,7 +1,10 @@
+import AppRouter from './AppRouter';
 
 function App() {
   return (
-    <div></div>
+    <div >
+      <AppRouter />
+    </div>
   );
 }
 
