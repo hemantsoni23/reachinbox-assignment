@@ -148,7 +148,7 @@ const InboxContainer = ({ selectedThread }) => {
                 )}
             </div>
             <div
-                className="cursor-pointer flex items-center absolute bottom-4 left-4 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-6 py-2 "
+                className="cursor-pointer flex items-center absolute bottom-4 left-4 bg-gradient-to-r from-[#4B63DD] to-[#0524BFFC] rounded-md px-6 py-2 text-white"
                 onClick={toggleReply}
             >
                 <FaReply className="mr-2 text-xl" /> Reply

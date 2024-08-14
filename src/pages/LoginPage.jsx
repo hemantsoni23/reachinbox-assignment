@@ -14,7 +14,8 @@ const LoginPage = () => {
   }, [navigate]);
 
   const handleLogin = () => {
-    window.location.href = 'https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachinbox-assignment-hemantsoni.vercel.app/';
+    const redirect_uri = 'https://reachinbox-assignment-hemantsoni.vercel.app/login';
+    window.location.href = `https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=${redirect_uri}`;
   };
 
   return (
