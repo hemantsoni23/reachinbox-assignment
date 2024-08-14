@@ -37,10 +37,8 @@ Follow these steps to set up and run the project locally:
    Open `src/pages/LoginPage.jsx` and update the `redirectUrl` variable to your localhost or domain as follows:
 
    ```jsx
-     window.location.href = 'https://hiring.reachinbox.xyz/......../redirect_to=https://reachinbox-assignment-hemantsoni.vercel.app/'; // Replace with your localhost or domain
-     
-    //Example :- 
-    window.location.href = 'https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:3000/';
+      const redirect_uri = 'https://reachinbox-assignment-hemantsoni.vercel.app/login'; //change this to your localhost address or deployment link
+      window.location.href = `https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=${redirect_uri}`;
    ```
 
 4. **Start the Development Server**
