@@ -6,7 +6,7 @@ const storeTokenInLocalStorage = () => {
   const token = queryParams.get('token');
 
   if (token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", `Bearer ${token}`);
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 };

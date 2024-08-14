@@ -19,24 +19,20 @@ const SwitchTheme = () => {
 
   return (
     <div
-      className={`flex relative items-center cursor-pointer w-16 h-8 p-1 rounded-full ${
-        isDarkMode ? "bg-gray-300" : "bg-gray-600"
+      className={`relative flex items-center w-16 h-8 p-1 rounded-full cursor-pointer ${
+        isDarkMode ? "bg-gray-600" : "bg-gray-300"
       }`}
       onClick={() => setIsDarkMode(!isDarkMode)}
     >
+      <div className="absolute inset-0 flex items-center justify-between px-2">
+        <FiMoon className={`text-[#E8C364] ${isDarkMode ? "" : "opacity-0"}`} />
+        <FiSun className={`text-[#E8C364] ${isDarkMode ? "opacity-0" : ""}`} />
+      </div>
       <div
         className={`w-6 h-6 rounded-full transition-transform duration-300 ${
-          isDarkMode ? "transform translate-x-8 bg-white" : "bg-gray-300"
+          isDarkMode ? "transform translate-x-full bg-white" : "bg-gray-100"
         }`}
       />
-      <div className="absolute inset-0 flex items-center justify-around px-1">
-        <FiMoon
-          className={`text-[#E8C364] ${isDarkMode ? "opacity-100" : "opacity-0"}`}
-        />
-        <FiSun
-          className={`text-[#E8C364] ${isDarkMode ? "opacity-0" : "opacity-100"}`}
-        />
-      </div>
     </div>
   );
 };

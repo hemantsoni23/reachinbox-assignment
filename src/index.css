@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  --bg-color: #1f1f1f;
+:root {
+  --background-color: #1f1f1f;
   --text-color: #ffffff;
 }
 
-html.light {
-  --bg-color: #ffffff;
+.light {
+  --background-color: #ffffff;
   --text-color: #000000;
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   color: var(--text-color);
 }
 
