@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCaretDown, FaRegSmile } from "react-icons/fa";
 import { CiMenuKebab } from "react-icons/ci";
 import { MdOutlineImage } from "react-icons/md";
@@ -33,9 +33,43 @@ function MailReplyModal({ threadId, onClose }) {
     subject: "",
     body: "",
   });
+  const [showPreview, setShowPreview] = useState(false);
+
+  useEffect(() => {
+  const fetchThreadDetails = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        `https://hiring.reachinbox.xyz/api/v1/onebox/messages/${threadId}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      const data = response.data.data;
+      
+      if (data[0] && data[0].fromEmail && data[0].toEmail) { 
+        setReplyForm((prevForm) => ({
+          ...prevForm,
+          to: data[0].fromEmail,
+          from: data[0].toEmail,
+        }));
+      } else {
+        console.error("Unexpected API response structure:", data[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching thread details:", error);
+    }
+  };
+  
+  fetchThreadDetails();
+}, [threadId]); 
+
 
   const sendReply = async () => {
-    const authToken = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     console.log(
       replyForm.to,
       replyForm.from,
@@ -53,7 +87,7 @@ function MailReplyModal({ threadId, onClose }) {
         },
         {
           headers: {
-            Authorization: authToken,
+            Authorization: token,
           },
         }
       );
@@ -70,6 +104,14 @@ function MailReplyModal({ threadId, onClose }) {
       ...prevForm,
       [name]: value,
     }));
+  };
+
+  const handlePreview = () => {
+    setShowPreview(true);
+  };
+
+  const closePreview = () => {
+    setShowPreview(false);
   };
 
   return (
@@ -100,7 +142,7 @@ function MailReplyModal({ threadId, onClose }) {
           ))}
           <div className="flex flex-col h-48">
             <textarea
-              className="bg-transparent dark:text-white text-black w-full h-full p-2 border dark:border-[#E0E0E0] border-[#41464B] rounded"
+              className="bg-transparent text-white dark:text-black w-full h-full p-2 border dark:border-[#E0E0E0] border-[#41464B] rounded"
               placeholder="Hi Jeanne,"
               name="body"
               value={replyForm.body}
@@ -120,6 +162,7 @@ function MailReplyModal({ threadId, onClose }) {
               <div
                 key={index}
                 className="flex space-x-2 cursor-pointer items-center text-[#ADADAD] dark:text-[#5B5F66]"
+                onClick={label === "Preview Email" ? handlePreview : null}
               >
                 {icon}
                 {label && <span>{label}</span>}
@@ -128,6 +171,35 @@ function MailReplyModal({ threadId, onClose }) {
           </div>
         </div>
       </div>
+
+      {showPreview && (
+        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white text-black w-full max-w-lg p-6 rounded-lg shadow-lg">
+            <h2 className=" text-lg font-semibold mb-4">Email Preview</h2>
+            <div className="mb-2">
+              <strong>To:</strong> {replyForm.to}
+            </div>
+            <div className="mb-2">
+              <strong>From:</strong> {replyForm.from}
+            </div>
+            <div className="mb-2">
+              <strong>Subject:</strong> {replyForm.subject}
+            </div>
+            <div>
+              <strong>Body:</strong>
+              <p>{replyForm.body}</p>
+            </div>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={closePreview}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
