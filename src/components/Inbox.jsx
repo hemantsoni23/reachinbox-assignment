@@ -55,7 +55,7 @@ const Inbox = () => {
 
   // Main content
   return (
-    <div className="dark:bg-[#ECEFF3] bg-black text-white dark:text-[#5B5F66] pt-16 flex flex-col lg:flex-row w-full h-screen">
+    <div className="dark:bg-[#ECEFF3] bg-black text-white dark:text-[#5B5F66] pt-16 flex flex-col lg:flex-row w-full h-full md:h-screen">
       <div className="w-full lg:w-1/5 lg:min-w-[250px]">
         <InboxListView data={data} loadMail={loadMail} />
       </div>

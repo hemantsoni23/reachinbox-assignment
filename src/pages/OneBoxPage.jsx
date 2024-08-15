@@ -24,7 +24,7 @@ const OneBox = () => {
   const SelectedComponent = componentMapping[selectedComponent];
 
   return (
-    <div className="h-screen w-screen bg-black dark:bg-white pl-14">
+    <div className="h-full lg:h-screen w-screen bg-black dark:bg-white pl-14">
       <SideBar onMenuItemClick={handleMenuItemClick} />
       <TopBar />
       <div>

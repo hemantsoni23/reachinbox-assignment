@@ -25,7 +25,7 @@ function InboxListView({ data, loadMail }) {
   }
 
   return (
-    <div className="border-r-2 dark:bg-[#FAFAFA] bg-black border-[#33383F] dark:border-[#E0E0E0] h-full overflow-y-scroll no-scrollbar">
+    <div className="relative z-1 border-r-2 dark:bg-[#FAFAFA] bg-black border-[#33383F] dark:border-[#E0E0E0] h-full overflow-y-auto no-scrollbar">
       <div className="px-2 pt-2 flex justify-between">
         <div className="px-2">
           <div className="text-xl py-1 text-[#4285F4] font-semibold flex items-center">
